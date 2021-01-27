@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Заур Малахов](https://up.htmlacademy.ru/javascript/22/user/1567759).
-* Наставник: `Неизвестно`.
+* Наставник: [Максим Петрищак](https://htmlacademy.ru/profile/maksim_petrishchak).
 
 ---
 
