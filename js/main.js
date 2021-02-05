@@ -1,4 +1,4 @@
-const getRandomIntegerFromRange = function (min = 0, max = 10) {
+const showFunctionException = (min, max) => {
   // параметры должны быть числами
   if (typeof min !== 'number' || typeof max !== 'number') {
     throw 'Параметры функции должны быть числами';
@@ -13,6 +13,10 @@ const getRandomIntegerFromRange = function (min = 0, max = 10) {
   if (min > max) {
     throw 'Неверный диапазон';
   }
+}
+
+const getRandomIntegerFromRange = (min = 0, max = 10) => {
+  showFunctionException(min, max);
 
   // диапазон из одинаковых чисел
   if (min === max) {
@@ -21,17 +25,16 @@ const getRandomIntegerFromRange = function (min = 0, max = 10) {
   }
 
   // случайное число от min до (max+1)
-  let rand = min + Math.random() * (max + 1 - min);
-  return Math.floor(rand);
+  return Math.floor(min + Math.random() * (max + 1 - min));
 }
 
-const isValidStringLength = function (text = '', length = 10) {
-  if (typeof text !== 'string' || typeof length !== 'number') {
+const isAllowedStringLength = (string = '', length = 10) => {
+  if (typeof string !== 'string' || typeof length !== 'number') {
     throw 'Первый параметр должен быть строкой, второй должен быть числом';
   }
 
-  return text.length <= length ? true : false;
+  return string.length <= length ? true : false;
 }
 
 getRandomIntegerFromRange(0, 10);
-isValidStringLength('hello', 10);
+isAllowedStringLength('hello', 10);
