@@ -82,8 +82,7 @@ const NAMES = [
   'Татьяна',
   'София',
 ];
-const objects = [];
-const comments = [];
+const INITIAL_POST_COUNT = 25;
 const messages = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -93,37 +92,30 @@ const messages = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
+const generateId = () => Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+const getRandomIndex = (array) => array[Math.floor(Math.random() * array.length)];
+
 const createComment = () => {
-  const commentIndex = comments.push({}) - 1;
   const avatarNumber = getRandomIntegerFromRange(1, 6);
-  const comment = {
-    id: commentIndex + 1,
+  return {
+    id: generateId(),
     avatar: `img/avatar-${avatarNumber}.svg`,
-    message: messages[getRandomIntegerFromRange(0, messages.length - 1)],
-    name: NAMES[getRandomIntegerFromRange(0, NAMES.length - 1)],
+    message: getRandomIndex(messages),
+    name: getRandomIndex(NAMES),
   }
-  comments[commentIndex] = comment;
-  return comment;
-}
-
-const createUserComments = () => {
-  const length = getRandomIntegerFromRange(1, 10);
-
-  return new Array(length).fill(null).map(() => createComment());
 }
 
 const createObject = (id = 1) => {
+  const comments = new Array(5).fill().map(createComment);
   return {
-    id: id,
+    id: ++id,
     url: `photos/${id}.jpg`,
-    description: DESCRIPTIONS[getRandomIntegerFromRange(0, DESCRIPTIONS.length - 1)],
+    description: getRandomIndex(DESCRIPTIONS),
     likes: getRandomIntegerFromRange(15, 200),
-    comments: createUserComments(),
+    comments: comments,
   }
 }
-const createObjects = () => {
-  for (let i = 1; i <= 25; i++) {
-    objects.push(createObject(i));
-  }
-}
-createObjects();
+
+const commentList = new Array(INITIAL_POST_COUNT).fill().map((_, i) => createObject(i));
+
+commentList;
