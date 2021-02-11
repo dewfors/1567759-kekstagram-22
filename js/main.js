@@ -83,7 +83,7 @@ const NAMES = [
   'София',
 ];
 const INITIAL_POST_COUNT = 25;
-const messages = [
+const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -100,13 +100,13 @@ const createComment = () => {
   return {
     id: generateId(),
     avatar: `img/avatar-${avatarNumber}.svg`,
-    message: getRandomIndex(messages),
+    message: getRandomIndex(MESSAGES),
     name: getRandomIndex(NAMES),
   }
 }
 
 const createObject = (id = 1) => {
-  const comments = new Array(5).fill().map(createComment);
+  const comments = new Array(getRandomIntegerFromRange(1, 5)).fill().map(createComment);
   return {
     id: ++id,
     url: `photos/${id}.jpg`,
