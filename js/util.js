@@ -36,4 +36,8 @@ const isAllowedStringLength = (string = '', length = 10) => {
   return string.length <= length ? true : false;
 }
 
-export {getRandomIntegerFromRange, isAllowedStringLength};
+const generateId = () => Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
+const getRandomIndex = (array) => array[Math.floor(Math.random() * array.length)];
+
+
+export {getRandomIntegerFromRange, isAllowedStringLength, generateId, getRandomIndex};

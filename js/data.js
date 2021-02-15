@@ -1,4 +1,4 @@
-import {getRandomIntegerFromRange} from './util.js';
+import {getRandomIntegerFromRange, generateId, getRandomIndex} from './util.js';
 
 const DESCRIPTIONS = [
   'Лапа спящего гризли',
@@ -52,10 +52,6 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const generateId = () => Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
-const getRandomIndex = (array) => array[Math.floor(Math.random() * array.length)];
-const getInitialPostCount = () => INITIAL_POST_COUNT;
-
 const createComment = () => {
   const avatarNumber = getRandomIntegerFromRange(1, 6);
   return {
@@ -77,4 +73,4 @@ const createObject = (id = 1) => {
   }
 }
 
-export {getInitialPostCount, createObject};
+export {INITIAL_POST_COUNT, createObject};
