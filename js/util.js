@@ -39,5 +39,12 @@ const isAllowedStringLength = (string = '', length = 10) => {
 const generateId = () => Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
 const getRandomIndex = (array) => array[Math.floor(Math.random() * array.length)];
 
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
 
-export {getRandomIntegerFromRange, isAllowedStringLength, generateId, getRandomIndex};
+const isEnterEvent = (evt) => {
+  return evt.key === 'Enter';
+};
+
+export {getRandomIntegerFromRange, isAllowedStringLength, generateId, getRandomIndex, isEscEvent, isEnterEvent};
