@@ -10,27 +10,22 @@ const scaleProperty = {
   SCALE_STEP: 25,
 }
 
-const setScaleImage = (evt) => {
+const setScaleImage = ({target}) => {
   let scaleValue = parseInt(scaleControlValueElement.value);
 
-  if (evt.target === scaleControlSmallerElement) {
+  if (target === scaleControlSmallerElement) {
     if (scaleValue !== scaleProperty.SCALE_MIN) {
       scaleValue -= scaleProperty.SCALE_STEP;
     }
   }
-  if (evt.target === scaleControlBiggerElement) {
+  if (target === scaleControlBiggerElement) {
     if (scaleValue !== scaleProperty.SCALE_MAX) {
       scaleValue += scaleProperty.SCALE_STEP;
     }
   }
   scaleControlValueElement.value = `${scaleValue}%`;
-  imageUploadPreviewElement.style.transform = `scale(${scaleValue/100})`;
+  imageUploadPreviewElement.style.transform = `scale(${scaleValue / 100})`;
 }
 
-scaleControlSmallerElement.addEventListener('click', (evt) => {
-  setScaleImage(evt);
-})
-
-scaleControlBiggerElement.addEventListener('click', (evt) => {
-  setScaleImage(evt);
-})
+scaleControlSmallerElement.addEventListener('click', setScaleImage);
+scaleControlBiggerElement.addEventListener('click', setScaleImage);
