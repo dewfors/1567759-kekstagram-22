@@ -10,6 +10,10 @@ const scaleProperty = {
   SCALE_STEP: 25,
 }
 
+const clearScaleImage = () => {
+  scaleControlValueElement.value = `${scaleProperty.SCALE_MAX}%`;
+};
+
 const setScaleImage = ({target}) => {
   let scaleValue = parseInt(scaleControlValueElement.value);
 
@@ -29,3 +33,7 @@ const setScaleImage = ({target}) => {
 
 scaleControlSmallerElement.addEventListener('click', setScaleImage);
 scaleControlBiggerElement.addEventListener('click', setScaleImage);
+
+
+
+export {clearScaleImage};

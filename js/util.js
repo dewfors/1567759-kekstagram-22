@@ -70,4 +70,7 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 }
 
+
+
+
 export {getRandomIntegerFromRange, isAllowedStringLength, generateId, getRandomIndex, isEscEvent, isEnterEvent, showAlert};

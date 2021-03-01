@@ -38,3 +38,5 @@ imageModalCloseElement.addEventListener('keydown', (evt) => {
   }
   closeUploadImageModal();
 });
+
+export {closeUploadImageModal};
