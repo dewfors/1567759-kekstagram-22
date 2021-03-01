@@ -5,8 +5,9 @@ const imageUploadEffectsElement = document.querySelector('.img-upload__effects')
 const effectsListElement = imageUploadEffectsElement.querySelector('.effects__list');
 const imageUploadPreviewElement = document.querySelector('.img-upload__preview img');
 const sliderElement = document.querySelector('.effect-level__slider');
-// const sliderValueElement = document.querySelector('.text__hashtags'); // todo
-const sliderValueElement = document.querySelector('.effect-level__value'); // todo
+const sliderValueElement = document.querySelector('.effect-level__value');
+const defaultValueInputElement = document.querySelector('#effect-none');
+
 
 const filters = {
   'none': {filter: 'none', minValue: 0, maxValue: 1, step: 1},
@@ -20,7 +21,7 @@ const filters = {
 imageUploadEffectsBlock.style.display = 'none';
 sliderValueElement.value = 80;
 
-noUiSlider.create(sliderElement, {
+window.noUiSlider.create(sliderElement, {
   range: {
     min: 0,
     max: 100,
@@ -47,7 +48,6 @@ sliderElement.noUiSlider.on('update', (values, handle) => {
 });
 
 const setEffectLevel = (selectedEffect) => {
-  // console.log(selectedEffect);
   switch (selectedEffect) {
     case 'chrome':
       imageUploadPreviewElement.style.filter = `grayscale(${sliderValueElement.value})`;
@@ -70,8 +70,15 @@ const setEffectLevel = (selectedEffect) => {
   }
 }
 
+const clearEffect = () => {
+  imageUploadPreviewElement.classList = '';
+  imageUploadPreviewElement.classList.add('effects__preview--none');
+  imageUploadEffectsBlock.style.display = 'none';
+  defaultValueInputElement.checked = 'checked';
+};
+
+
 const setEffect = (evt) => {
-  // console.log(evt.target.value);
   imageUploadPreviewElement.classList = '';
   imageUploadPreviewElement.classList.add(`effects__preview--${evt.target.value}`);
 
@@ -81,7 +88,6 @@ const setEffect = (evt) => {
     imageUploadEffectsBlock.style.display = 'block';
   }
 
-  // console.log(filters[evt.target.value]);
   const filter = filters[evt.target.value];
 
 
@@ -100,7 +106,6 @@ const setEffect = (evt) => {
 
 }
 
-effectsListElement.addEventListener('change', (evt) => {
-  setEffect(evt);
-});
+effectsListElement.addEventListener('change', setEffect);
 
+export {clearEffect};
