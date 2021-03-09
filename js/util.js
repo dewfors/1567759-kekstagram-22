@@ -41,6 +41,19 @@ const isAllowedStringLength = (string = '', length = 10) => {
 const generateId = () => Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
 const getRandomIndex = (array) => array[Math.floor(Math.random() * array.length)];
 
+const getRandomiseArray = (arr, countOfElements) => {
+  let copyArray = arr.slice();
+
+  let result = [];
+  while (copyArray.length > 0) {
+    let random = getRandomIntegerFromRange(0, copyArray.length-1);
+    let elem = copyArray.splice(random, 1)[0];
+    result.push(elem);
+  }
+
+  return result.slice(0, countOfElements);
+};
+
 const isEscEvent = (evt) => {
   return evt.key === ('Escape' || 'Esc');
 };
@@ -73,4 +86,4 @@ const showAlert = (message) => {
 
 
 
-export {getRandomIntegerFromRange, isAllowedStringLength, generateId, getRandomIndex, isEscEvent, isEnterEvent, showAlert};
+export {getRandomIntegerFromRange, isAllowedStringLength, generateId, getRandomIndex, getRandomiseArray, isEscEvent, isEnterEvent, showAlert};
