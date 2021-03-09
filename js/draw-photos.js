@@ -87,8 +87,21 @@ const getFiltredPicturesRandom = (userPictures) => {
   return getRandomiseArray(userPictures, COUNT_RANDOM_PICTURES);
 }
 
-const getFiltredPictures = (userPictures) => {
+const sortPictures = (pictureA, pictureB) => {
+  const rankA = pictureA.comments.length;
+  const rankB = pictureB.comments.length;
 
+  return rankB - rankA;
+}
+
+
+const getFiltredPicturesDiscussed = (userPictures) => {
+  return userPictures
+    .slice()
+    .sort(sortPictures);
+}
+
+const getFiltredPictures = (userPictures) => {
   const filter = filterActive.current;
 
   switch (filter) {
@@ -98,10 +111,9 @@ const getFiltredPictures = (userPictures) => {
       // return userPictures.slice(0, 10);
       return getFiltredPicturesRandom(userPictures);
     case 'discussed':
-      return userPictures.slice();
+      // return userPictures.slice();
+      return getFiltredPicturesDiscussed(userPictures);
   }
-
-
 }
 
 const removePictures = () => {
