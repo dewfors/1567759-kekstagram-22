@@ -8,7 +8,6 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const sliderValueElement = document.querySelector('.effect-level__value');
 const defaultValueInputElement = document.querySelector('#effect-none');
 
-
 const filters = {
   'none': {filter: 'none', minValue: 0, maxValue: 1, step: 1},
   'chrome': {filter: 'grayscale', minValue: 0, maxValue: 1, step: 0.1},
@@ -40,7 +39,6 @@ window.noUiSlider.create(sliderElement, {
       return parseFloat(value);
     },
   },
-
 });
 
 sliderElement.noUiSlider.on('update', (values, handle) => {
@@ -77,7 +75,6 @@ const clearEffect = () => {
   defaultValueInputElement.checked = 'checked';
 };
 
-
 const setEffect = (evt) => {
   imageUploadPreviewElement.classList = '';
   imageUploadPreviewElement.classList.add(`effects__preview--${evt.target.value}`);
@@ -89,7 +86,6 @@ const setEffect = (evt) => {
   }
 
   const filter = filters[evt.target.value];
-
 
   sliderElement.noUiSlider.updateOptions({
     range: {
@@ -103,7 +99,6 @@ const setEffect = (evt) => {
   sliderElement.noUiSlider.on('update', () => {
     setEffectLevel(evt.target.value);
   });
-
 }
 
 effectsListElement.addEventListener('change', setEffect);

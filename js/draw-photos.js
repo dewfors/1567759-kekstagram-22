@@ -1,5 +1,7 @@
 import {getRandomiseArray} from './util.js';
+import {renderImageModal} from './image-modal.js';
 
+const COUNT_RANDOM_PICTURES = 10;
 
 const pictureListElement = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture')
@@ -21,8 +23,6 @@ const filterActive = {
   current: filters.default,
 }
 
-// let filter = filters.default;
-
 const setFilter = (value) => {
   filterActive.current = value;
 };
@@ -31,59 +31,42 @@ const showImgFilters = () => {
   imgFiltersElement.classList.toggle('img-filters--inactive');
 };
 
+const FILTER_BUTTON_ACTIVE_CLASS = 'img-filters__button--active';
+
 const clearActiveFilter = () => {
-  filterDefaultElement.classList.remove('img-filters__button--active');
-  filterRandomElement.classList.remove('img-filters__button--active');
-  filterDiscussedElement.classList.remove('img-filters__button--active');
+  filterDefaultElement.classList.remove(FILTER_BUTTON_ACTIVE_CLASS);
+  filterRandomElement.classList.remove(FILTER_BUTTON_ACTIVE_CLASS);
+  filterDiscussedElement.classList.remove(FILTER_BUTTON_ACTIVE_CLASS);
 };
 
 const setFilterDefault = (cb) => {
   filterDefaultElement.addEventListener('click', () => {
     clearActiveFilter();
-    filterDefaultElement.classList.add('img-filters__button--active');
+    filterDefaultElement.classList.add(FILTER_BUTTON_ACTIVE_CLASS);
     setFilter(filters.default);
     cb();
   });
 };
+
 const setFilterRandom = (cb) => {
   filterRandomElement.addEventListener('click', () => {
     clearActiveFilter();
-    filterRandomElement.classList.add('img-filters__button--active');
+    filterRandomElement.classList.add(FILTER_BUTTON_ACTIVE_CLASS);
     setFilter(filters.random);
     cb();
   });
 };
+
 const setFilterDiscussed = (cb) => {
   filterDiscussedElement.addEventListener('click', () => {
     clearActiveFilter();
-    filterDiscussedElement.classList.add('img-filters__button--active');
+    filterDiscussedElement.classList.add(FILTER_BUTTON_ACTIVE_CLASS);
     setFilter(filters.discussed);
     cb();
   });
 };
 
-// filterDefaultElement.addEventListener('click', () => {
-//   clearActiveFilter();
-//   filterDefaultElement.classList.add('img-filters__button--active');
-//   setFilter(filters.default);
-// });
-
-// filterRandomElement.addEventListener('click', () => {
-//   clearActiveFilter();
-//   filterRandomElement.classList.add('img-filters__button--active');
-//   setFilter(filters.random);
-// });
-
-// filterDiscussedElement.addEventListener('click', () => {
-//   clearActiveFilter();
-//   filterDiscussedElement.classList.add('img-filters__button--active');
-//   setFilter(filters.discussed);
-// });
-
-const COUNT_RANDOM_PICTURES = 10;
-
 const getFiltredPicturesRandom = (userPictures) => {
-  // console.log(getRandomiseArray(userPictures, COUNT_RANDOM_PICTURES));
   return getRandomiseArray(userPictures, COUNT_RANDOM_PICTURES);
 }
 
@@ -94,11 +77,11 @@ const sortPictures = (pictureA, pictureB) => {
   return rankB - rankA;
 }
 
-
 const getFiltredPicturesDiscussed = (userPictures) => {
-  return userPictures
-    .slice()
-    .sort(sortPictures);
+  // return userPictures
+  //   .slice()
+  //   .sort(sortPictures);
+  return [...userPictures].sort(sortPictures);
 }
 
 const getFiltredPictures = (userPictures) => {
@@ -108,10 +91,8 @@ const getFiltredPictures = (userPictures) => {
     case 'default':
       return userPictures.slice();
     case 'random':
-      // return userPictures.slice(0, 10);
       return getFiltredPicturesRandom(userPictures);
     case 'discussed':
-      // return userPictures.slice();
       return getFiltredPicturesDiscussed(userPictures);
   }
 }
@@ -127,13 +108,16 @@ const renderPictures = (userPictures) => {
   const pictureListFragment = document.createDocumentFragment();
   const pictures = getFiltredPictures(userPictures);
 
-  // userPictures.forEach(({url, likes, comments}) => {
-  pictures.forEach(({url, likes, comments}) => {
+  // pictures.forEach(({url, likes, comments}) => {
+  pictures.forEach((picture) => {
     const pictureElement = pictureTemplate.cloneNode(true);
 
-    pictureElement.querySelector('.picture__img').src = url;
-    pictureElement.querySelector('.picture__likes').textContent = likes;
-    pictureElement.querySelector('.picture__comments').textContent = comments.length;
+    pictureElement.querySelector('.picture__img').src = picture.url;
+    pictureElement.querySelector('.picture__likes').textContent = picture.likes;
+    pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
+    pictureElement.addEventListener('click', () => {
+      renderImageModal(picture);
+    });
 
     pictureListFragment.appendChild(pictureElement);
   });

@@ -34,6 +34,4 @@ const setScaleImage = ({target}) => {
 scaleControlSmallerElement.addEventListener('click', setScaleImage);
 scaleControlBiggerElement.addEventListener('click', setScaleImage);
 
-
-
 export {clearScaleImage};
