@@ -1,4 +1,5 @@
 import {getRandomiseArray} from './util.js';
+import {renderImageModal} from './image-modal.js';
 
 const COUNT_RANDOM_PICTURES = 10;
 
@@ -107,12 +108,16 @@ const renderPictures = (userPictures) => {
   const pictureListFragment = document.createDocumentFragment();
   const pictures = getFiltredPictures(userPictures);
 
-  pictures.forEach(({url, likes, comments}) => {
+  // pictures.forEach(({url, likes, comments}) => {
+  pictures.forEach((picture) => {
     const pictureElement = pictureTemplate.cloneNode(true);
 
-    pictureElement.querySelector('.picture__img').src = url;
-    pictureElement.querySelector('.picture__likes').textContent = likes;
-    pictureElement.querySelector('.picture__comments').textContent = comments.length;
+    pictureElement.querySelector('.picture__img').src = picture.url;
+    pictureElement.querySelector('.picture__likes').textContent = picture.likes;
+    pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
+    pictureElement.addEventListener('click', () => {
+      renderImageModal(picture);
+    });
 
     pictureListFragment.appendChild(pictureElement);
   });
