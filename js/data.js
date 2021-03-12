@@ -76,6 +76,5 @@ const createObject = (id = 1) => {
 const createPhotos = () => {
   return new Array(INITIAL_POST_COUNT).fill().map((_, i) => createObject(i));
 }
-// const commentList = new Array(INITIAL_POST_COUNT).fill().map((_, i) => createObject(i));
 
 export {INITIAL_POST_COUNT, createObject, createPhotos};
