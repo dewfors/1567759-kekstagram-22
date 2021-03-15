@@ -1,6 +1,7 @@
 /* global _:readonly */
 
-import {renderPictures, showImgFilters, setFilterDefault, setFilterRandom, setFilterDiscussed} from './draw-photos.js';
+// import {renderPictures, showImgFilters, filters, setFilter, setFilterDefault, setFilterRandom, setFilterDiscussed} from './draw-photos.js';
+import {renderPictures, showImgFilters, filters, setFilter} from './draw-photos.js';
 import './upload-image-modal.js';
 import './upload-image-form.js';
 import './upload-image-scale.js';
@@ -15,9 +16,9 @@ getData(
   (data) => {
     showImgFilters();
     renderPictures(data);
-    setFilterDefault(_.debounce(() => renderPictures(data), RERENDER_DELAY));
-    setFilterRandom(_.debounce(() => renderPictures(data), RERENDER_DELAY));
-    setFilterDiscussed(_.debounce(() => renderPictures(data), RERENDER_DELAY));
+    setFilter(filters.default, _.debounce(() => renderPictures(data), RERENDER_DELAY));
+    setFilter(filters.random, _.debounce(() => renderPictures(data), RERENDER_DELAY));
+    setFilter(filters.discussed, _.debounce(() => renderPictures(data), RERENDER_DELAY));
   },
   () => showAlert('Не удалось получить данные с сервера. Попробуйте позже.'));
 

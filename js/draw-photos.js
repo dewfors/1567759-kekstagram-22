@@ -14,16 +14,25 @@ const filterRandomElement = imgFiltersElement.querySelector('#filter-random');
 const filterDiscussedElement = imgFiltersElement.querySelector('#filter-discussed');
 
 const filters = {
-  default: 'default',
-  random: 'random',
-  discussed: 'discussed',
+  default: {
+    type: 'default',
+    element: filterDefaultElement,
+  },
+  random: {
+    type: 'random',
+    element: filterRandomElement,
+  },
+  discussed: {
+    type: 'discussed',
+    element: filterDiscussedElement,
+  },
 }
 
 const filterActive = {
-  current: filters.default,
+  current: filters.default.type,
 }
 
-const setFilter = (value) => {
+const setActiveFilter = (value) => {
   filterActive.current = value;
 };
 
@@ -39,29 +48,11 @@ const clearActiveFilter = () => {
   filterDiscussedElement.classList.remove(FILTER_BUTTON_ACTIVE_CLASS);
 };
 
-const setFilterDefault = (cb) => {
-  filterDefaultElement.addEventListener('click', () => {
+const setFilter = (filter, cb) => {
+  filter.element.addEventListener('click', () => {
     clearActiveFilter();
-    filterDefaultElement.classList.add(FILTER_BUTTON_ACTIVE_CLASS);
-    setFilter(filters.default);
-    cb();
-  });
-};
-
-const setFilterRandom = (cb) => {
-  filterRandomElement.addEventListener('click', () => {
-    clearActiveFilter();
-    filterRandomElement.classList.add(FILTER_BUTTON_ACTIVE_CLASS);
-    setFilter(filters.random);
-    cb();
-  });
-};
-
-const setFilterDiscussed = (cb) => {
-  filterDiscussedElement.addEventListener('click', () => {
-    clearActiveFilter();
-    filterDiscussedElement.classList.add(FILTER_BUTTON_ACTIVE_CLASS);
-    setFilter(filters.discussed);
+    filter.element.classList.add(FILTER_BUTTON_ACTIVE_CLASS);
+    setActiveFilter(filter.type);
     cb();
   });
 };
@@ -108,7 +99,6 @@ const renderPictures = (userPictures) => {
   const pictureListFragment = document.createDocumentFragment();
   const pictures = getFiltredPictures(userPictures);
 
-  // pictures.forEach(({url, likes, comments}) => {
   pictures.forEach((picture) => {
     const pictureElement = pictureTemplate.cloneNode(true);
 
@@ -127,4 +117,4 @@ const renderPictures = (userPictures) => {
 
 };
 
-export {renderPictures, showImgFilters, setFilterDefault, setFilterRandom, setFilterDiscussed};
+export {renderPictures, showImgFilters, filters, setFilter};
