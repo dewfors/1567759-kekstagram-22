@@ -1,6 +1,9 @@
 import {isEscEvent} from './util.js';
 
-const bodyElement = document.querySelector('body');
+const CLASS_HIDDEN = 'hidden';
+const CLASS_MODAL_OPEN = 'modal-open';
+
+const bodyElement = document.body;
 const imageModalElement = document.querySelector('.big-picture');
 const commentCountElement = imageModalElement.querySelector('.social__comment-count');
 const commentListElement = imageModalElement.querySelector('.social__comments');
@@ -17,11 +20,11 @@ const onPopUpEscKeydown = (evt) => {
 };
 
 const openImageModal = () => {
-  imageModalElement.classList.remove('hidden');
+  imageModalElement.classList.remove(CLASS_HIDDEN);
   document.addEventListener('keydown', onPopUpEscKeydown);
-  commentCountElement.classList.add('hidden');
-  commentsLoadingButton.classList.add('hidden');
-  bodyElement.classList.add('modal-open');
+  commentCountElement.classList.add(CLASS_HIDDEN);
+  commentsLoadingButton.classList.add(CLASS_HIDDEN);
+  bodyElement.classList.add(CLASS_MODAL_OPEN);
   imageModalCloseElement.addEventListener('click', onClickCloseButton);
 };
 
@@ -30,9 +33,9 @@ const onClickCloseButton = () => {
 }
 
 const closeModal = () => {
-  imageModalElement.classList.add('hidden');
+  imageModalElement.classList.add(CLASS_HIDDEN);
   document.removeEventListener('keydown', onPopUpEscKeydown);
-  bodyElement.classList.remove('modal-open');
+  bodyElement.classList.remove(CLASS_MODAL_OPEN);
   clearComments();
 }
 
@@ -40,7 +43,7 @@ const renderImageModal = (picture) => {
   openImageModal();
   modalImg.src = picture.url;
   modalImg.alt = '';
-  modalLikes.textContent = String(picture.likes);
+  modalLikes.textContent = picture.likes;
   modalDescription.textContent = picture.description;
 
   if (picture.comments) {

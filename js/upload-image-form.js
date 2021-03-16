@@ -29,11 +29,16 @@ const formSubmit = () => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
+    if (description.checkValidity() === false || hashtags.checkValidity() === false) {
+      return;
+    }
+
     sendData(
       () => onSuccess(),
       () => onFail(),
       new FormData(evt.target),
     );
+
   });
 };
 

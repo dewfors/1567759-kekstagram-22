@@ -1416,3 +1416,7 @@ main {
 .hidden {
   display: none;
 }
+
+.error-field {
+  color: red;
+}
