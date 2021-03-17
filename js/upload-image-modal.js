@@ -2,12 +2,14 @@ import {isEscEvent, isEnterEvent} from './util.js';
 
 const CLASS_HIDDEN = 'hidden';
 const CLASS_MODAL_OPEN = 'modal-open';
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const fileNameElement = document.querySelector('#upload-file');
 const imageOverlayElement = document.querySelector('.img-upload__overlay');
 const bodyElement = document.querySelector('body');
 const imageModalCloseElement = document.querySelector('#upload-cancel');
 const form = document.querySelector('.img-upload__form');
+const preview = form.querySelector('.img-upload__preview img')
 const hashtags = form.querySelector('.text__hashtags');
 const description = form.querySelector('.text__description');
 
@@ -29,9 +31,31 @@ const onPopupEscKeydown = (evt) => {
   closeUploadImageModal();
 };
 
+const loadFile = () => {
+  const file = fileNameElement.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      preview.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+
+};
+
 const openUploadImageModal = () => {
   imageOverlayElement.classList.remove(CLASS_HIDDEN);
   bodyElement.classList.add(CLASS_MODAL_OPEN);
+
+  fileNameElement.addEventListener('change', loadFile);
 
   document.addEventListener('keydown', onPopupEscKeydown);
 };
@@ -39,6 +63,9 @@ const openUploadImageModal = () => {
 const closeUploadImageModal = () => {
   imageOverlayElement.classList.add(CLASS_HIDDEN);
   bodyElement.classList.remove(CLASS_MODAL_OPEN);
+
+  fileNameElement.removeEventListener('change', loadFile);
+
   // fileNameElement.value = '';
   // hashtags.value = '';
   // description.value = '';
