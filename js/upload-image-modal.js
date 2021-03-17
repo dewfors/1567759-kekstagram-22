@@ -1,5 +1,8 @@
 import {isEscEvent, isEnterEvent} from './util.js';
 
+const CLASS_HIDDEN = 'hidden';
+const CLASS_MODAL_OPEN = 'modal-open';
+
 const fileNameElement = document.querySelector('#upload-file');
 const imageOverlayElement = document.querySelector('.img-upload__overlay');
 const bodyElement = document.querySelector('body');
@@ -27,18 +30,19 @@ const onPopupEscKeydown = (evt) => {
 };
 
 const openUploadImageModal = () => {
-  imageOverlayElement.classList.remove('hidden');
-  bodyElement.classList.add('modal-open');
+  imageOverlayElement.classList.remove(CLASS_HIDDEN);
+  bodyElement.classList.add(CLASS_MODAL_OPEN);
 
   document.addEventListener('keydown', onPopupEscKeydown);
 };
 
 const closeUploadImageModal = () => {
-  imageOverlayElement.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
-  fileNameElement.value = '';
-  hashtags.value = '';
-  description.value = '';
+  imageOverlayElement.classList.add(CLASS_HIDDEN);
+  bodyElement.classList.remove(CLASS_MODAL_OPEN);
+  // fileNameElement.value = '';
+  // hashtags.value = '';
+  // description.value = '';
+  form.reset();
 
   document.removeEventListener('keydown', onPopupEscKeydown);
 };
