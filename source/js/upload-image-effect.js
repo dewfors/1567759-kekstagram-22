@@ -1,4 +1,6 @@
-import '../nouislider/nouislider.js';
+// import '../nouislider/nouislider.js';
+import noUiSlider from 'nouislider';
+import 'nouislider/distribute/nouislider.css';
 
 const imageUploadEffectsBlock = document.querySelector('.img-upload__effect-level');
 const imageUploadEffectsElement = document.querySelector('.img-upload__effects');
@@ -20,7 +22,10 @@ const filters = {
 imageUploadEffectsBlock.style.display = 'none';
 sliderValueElement.value = 80;
 
-window.noUiSlider.create(sliderElement, {
+
+
+// window.noUiSlider.create(sliderElement, {
+noUiSlider.create(sliderElement, {
   range: {
     min: 0,
     max: 100,
