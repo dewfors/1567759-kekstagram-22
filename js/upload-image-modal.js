@@ -1,7 +1,6 @@
+import {HIDDEN_STATE, MODAL_OPEN_STATE} from './constants.js';
 import {isEscEvent, isEnterEvent} from './util.js';
 
-const CLASS_HIDDEN = 'hidden';
-const CLASS_MODAL_OPEN = 'modal-open';
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const fileNameElement = document.querySelector('#upload-file');
@@ -52,8 +51,8 @@ const loadFile = () => {
 };
 
 const openUploadImageModal = () => {
-  imageOverlayElement.classList.remove(CLASS_HIDDEN);
-  bodyElement.classList.add(CLASS_MODAL_OPEN);
+  imageOverlayElement.classList.remove(HIDDEN_STATE);
+  bodyElement.classList.add(MODAL_OPEN_STATE);
 
   fileNameElement.addEventListener('change', loadFile);
 
@@ -61,8 +60,8 @@ const openUploadImageModal = () => {
 };
 
 const closeUploadImageModal = () => {
-  imageOverlayElement.classList.add(CLASS_HIDDEN);
-  bodyElement.classList.remove(CLASS_MODAL_OPEN);
+  imageOverlayElement.classList.add(HIDDEN_STATE);
+  bodyElement.classList.remove(MODAL_OPEN_STATE);
 
   fileNameElement.removeEventListener('change', loadFile);
 

@@ -1,12 +1,11 @@
+import {HIDDEN_STATE, MODAL_OPEN_STATE} from './constants.js';
 import {isEscEvent} from './util.js';
 
-const CLASS_HIDDEN = 'hidden';
-const CLASS_MODAL_OPEN = 'modal-open';
 const COUNT_COMMENTS_TO_LOADER = 5;
 let numberOfCommentsShown = 0;
 let commentsList = null;
 
-const bodyElement = document.body;
+const bodyElement = document.querySelector('body');
 const imageModalElement = document.querySelector('.big-picture');
 const commentCountElement = imageModalElement.querySelector('.social__comment-count');
 const commentListElement = imageModalElement.querySelector('.social__comments');
@@ -23,18 +22,18 @@ const onPopUpEscKeydown = (evt) => {
 };
 
 const showCommentsLoaderButton = () => {
-  commentsLoaderButton.classList.remove(CLASS_HIDDEN);
+  commentsLoaderButton.classList.remove(HIDDEN_STATE);
 };
 
 const hideCommentsLoaderButton = () => {
-  commentsLoaderButton.classList.add(CLASS_HIDDEN);
+  commentsLoaderButton.classList.add(HIDDEN_STATE);
 };
 
 const openImageModal = () => {
-  imageModalElement.classList.remove(CLASS_HIDDEN);
+  imageModalElement.classList.remove(HIDDEN_STATE);
   document.addEventListener('keydown', onPopUpEscKeydown);
-  commentCountElement.classList.add(CLASS_HIDDEN);
-  bodyElement.classList.add(CLASS_MODAL_OPEN);
+  commentCountElement.classList.add(HIDDEN_STATE);
+  bodyElement.classList.add(MODAL_OPEN_STATE);
   imageModalCloseElement.addEventListener('click', onClickCloseButton);
 };
 
@@ -43,9 +42,9 @@ const onClickCloseButton = () => {
 }
 
 const closeModal = () => {
-  imageModalElement.classList.add(CLASS_HIDDEN);
+  imageModalElement.classList.add(HIDDEN_STATE);
   document.removeEventListener('keydown', onPopUpEscKeydown);
-  bodyElement.classList.remove(CLASS_MODAL_OPEN);
+  bodyElement.classList.remove(MODAL_OPEN_STATE);
   clearComments();
   numberOfCommentsShown = 0;
   commentsLoaderButton.removeEventListener('click', showMoreComments);
