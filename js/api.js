@@ -3,8 +3,8 @@ const API_URL = 'https://22.javascript.pages.academy/kekstagram/';
 const getData = (onSuccess, onFail) => {
   fetch(`${API_URL}data`)
     .then((response) => response.json())
-    .then((wizards) => {
-      onSuccess(wizards);
+    .then((pictures) => {
+      onSuccess(pictures);
     })
     .catch(() => {
       onFail();

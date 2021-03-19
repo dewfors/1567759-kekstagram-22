@@ -47,7 +47,6 @@ const loadFile = () => {
 
     reader.readAsDataURL(file);
   }
-
 };
 
 const openUploadImageModal = () => {
@@ -65,9 +64,6 @@ const closeUploadImageModal = () => {
 
   fileNameElement.removeEventListener('change', loadFile);
 
-  // fileNameElement.value = '';
-  // hashtags.value = '';
-  // description.value = '';
   form.reset();
 
   document.removeEventListener('keydown', onPopupEscKeydown);
