@@ -1,6 +1,4 @@
-
 const DESCRIPTION_MAX_LENGTH = 140;
-
 const ERROR_STATE = 'error-field';
 const MAX_COUNT_HASHTAG = 5;
 const REGEX = /^#[^\W_]{1,19}$/; // Регулярка сразу проверяет что строка нчало с # только цифры и символы и что всего 20 симоволов
@@ -45,9 +43,7 @@ const checkUniqueHashTag = (array) => {
 
   const uniqueArr = new Set(hashtagLower);
   return array.length === uniqueArr.size;
-
 };
-
 
 const checkValidityHashtag = () => {
   //Считуем введеное значение и преобразуем в массив

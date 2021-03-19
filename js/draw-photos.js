@@ -69,9 +69,6 @@ const sortPictures = (pictureA, pictureB) => {
 }
 
 const getFiltredPicturesDiscussed = (userPictures) => {
-  // return userPictures
-  //   .slice()
-  //   .sort(sortPictures);
   return [...userPictures].sort(sortPictures);
 }
 

@@ -1,6 +1,5 @@
 /* global _:readonly */
 
-// import {renderPictures, showImgFilters, filters, setFilter, setFilterDefault, setFilterRandom, setFilterDiscussed} from './draw-photos.js';
 import {renderPictures, showImgFilters, filters, setFilter} from './draw-photos.js';
 import './upload-image-modal.js';
 import './upload-image-form.js';
