@@ -24,17 +24,17 @@ const getRandomIntegerFromRange = (min = 0, max = 10) => {
   return Math.floor(min + Math.random() * (max + 1 - min));
 }
 
-const getRandomiseArray = (arr, countOfElements) => {
-  let copyArray = arr.slice();
+const getRandomiseArray = (elements, countOfElements) => {
+  let copyElements = elements.slice();
 
-  let result = [];
-  while (copyArray.length > 0) {
-    let random = getRandomIntegerFromRange(0, copyArray.length-1);
-    let elem = copyArray.splice(random, 1)[0];
-    result.push(elem);
+  let resultElements = [];
+  while (copyElements.length > 0) {
+    let random = getRandomIntegerFromRange(0, copyElements.length-1);
+    let elem = copyElements.splice(random, 1)[0];
+    resultElements.push(elem);
   }
 
-  return result.slice(0, countOfElements);
+  return resultElements.slice(0, countOfElements);
 };
 
 const isEscEvent = (evt) => {
