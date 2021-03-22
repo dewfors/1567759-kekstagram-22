@@ -92,8 +92,19 @@ const onShowMoreComments = () => {
     .forEach((item) => {
       const commentItemElement = document.createElement('li');
       commentItemElement.classList.add('social__comment');
-      commentItemElement.innerHTML = `<img class="social__picture" src="${item.avatar}" alt="${item.name}" width="35" height="35">
-      <p class="social__text">${item.message}</p>`;
+
+      const commentImageElement = document.createElement('img');
+      commentImageElement.classList.add('social__picture');
+      commentImageElement.src = item.avatar;
+      commentImageElement.alt = item.name;
+      commentImageElement.width = '35';
+      commentImageElement.height = '35';
+      commentItemElement.appendChild(commentImageElement);
+
+      const commentMessageElement = document.createElement('p');
+      commentMessageElement.classList.add('social__text');
+      commentMessageElement.textContent = item.message;
+      commentItemElement.appendChild(commentMessageElement);
 
       commentListElement.append(commentItemElement);
     });
