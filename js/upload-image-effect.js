@@ -79,11 +79,7 @@ const setEffect = (evt) => {
   imageUploadPreviewElement.classList = '';
   imageUploadPreviewElement.classList.add(`effects__preview--${evt.target.value}`);
 
-  if (evt.target.value === 'none') {
-    imageUploadEffectsBlock.style.display = 'none';
-  } else {
-    imageUploadEffectsBlock.style.display = 'block';
-  }
+  imageUploadEffectsBlock.style.display = (evt.target.value === 'none') ? 'none' : 'block';
 
   const filter = filters[evt.target.value];
 

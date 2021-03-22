@@ -1,14 +1,14 @@
 import {HIDDEN_STATE, MODAL_OPEN_STATE} from './constants.js';
 import {isEscEvent, isEnterEvent} from './util.js';
-
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+import {FILE_TYPES} from './constants.js';
 
 const fileNameElement = document.querySelector('#upload-file');
 const imageOverlayElement = document.querySelector('.img-upload__overlay');
 const bodyElement = document.querySelector('body');
 const imageModalCloseElement = document.querySelector('#upload-cancel');
 const form = document.querySelector('.img-upload__form');
-const preview = form.querySelector('.img-upload__preview img')
+const preview = form.querySelector('.img-upload__preview img');
+const previewEffects = form.querySelectorAll('.effects__preview');
 const hashtags = form.querySelector('.text__hashtags');
 const description = form.querySelector('.text__description');
 
@@ -43,6 +43,9 @@ const loadFile = () => {
 
     reader.addEventListener('load', () => {
       preview.src = reader.result;
+      previewEffects.forEach((previewItem) => {
+        previewItem.style.backgroundImage = `url(${preview.src})`;
+      });
     });
 
     reader.readAsDataURL(file);

@@ -1,7 +1,6 @@
 import {getRandomiseArray} from './util.js';
 import {renderImageModal} from './image-modal.js';
-
-const COUNT_RANDOM_PICTURES = 10;
+import {COUNT_RANDOM_PICTURES} from './constants.js';
 
 const pictureListElement = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture')
