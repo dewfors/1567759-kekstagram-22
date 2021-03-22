@@ -14,7 +14,7 @@ const openMessage = (mode) => {
   messageFragment.appendChild(messageElement);
   mainElement.appendChild(messageFragment);
 
-  const closeMessage = () => {
+  const onCloseMessage = () => {
     messageElement.remove();
     document.removeEventListener('keydown', onPopupEscKeydown);
   };
@@ -24,21 +24,21 @@ const openMessage = (mode) => {
       return;
     }
     evt.preventDefault();
-    closeMessage();
+    onCloseMessage();
   };
 
   document.addEventListener('keydown', onPopupEscKeydown);
 
   const overlayElement = document.querySelector(`body section.${mode}`);
-  overlayElement.addEventListener('click', closeMessage);
+  overlayElement.addEventListener('click', onCloseMessage);
 
-  buttonElement.addEventListener('click', closeMessage);
+  buttonElement.addEventListener('click', onCloseMessage);
 
   buttonElement.addEventListener('keydown', (evt) => {
     if (!isEnterEvent(evt)) {
       return;
     }
-    closeMessage();
+    onCloseMessage();
   });
 
 

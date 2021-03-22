@@ -71,11 +71,12 @@ const setEffectLevel = (selectedEffect) => {
 const clearEffect = () => {
   imageUploadPreviewElement.classList = '';
   imageUploadPreviewElement.classList.add('effects__preview--none');
+  imageUploadPreviewElement.style = '';
   imageUploadEffectsBlock.style.display = 'none';
   defaultValueInputElement.checked = 'checked';
 };
 
-const setEffect = (evt) => {
+const onSetEffect = (evt) => {
   imageUploadPreviewElement.classList = '';
   imageUploadPreviewElement.classList.add(`effects__preview--${evt.target.value}`);
 
@@ -97,6 +98,6 @@ const setEffect = (evt) => {
   });
 }
 
-effectsListElement.addEventListener('change', setEffect);
+effectsListElement.addEventListener('change', onSetEffect);
 
 export {clearEffect};

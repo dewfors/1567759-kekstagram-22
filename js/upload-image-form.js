@@ -1,7 +1,7 @@
 import {sendData} from './api.js';
 import {clearScaleImage} from './upload-image-scale.js';
 import {clearEffect} from './upload-image-effect.js';
-import {closeUploadImageModal} from './upload-image-modal.js';
+import {onCloseUploadImageModal} from './upload-image-modal.js';
 import {openMessage} from './message-modal.js';
 
 const form = document.querySelector('.img-upload__form');
@@ -15,13 +15,13 @@ const onSuccess = () => {
   fileNameElement.value = '';
   clearScaleImage();
   clearEffect();
-  closeUploadImageModal();
+  onCloseUploadImageModal();
   openMessage('success');
 
 };
 
 const onFail = () => {
-  closeUploadImageModal();
+  onCloseUploadImageModal();
   openMessage('error');
 };
 

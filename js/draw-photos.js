@@ -1,6 +1,7 @@
+/* global _:readonly */
 import {getRandomiseArray} from './util.js';
 import {renderImageModal} from './image-modal.js';
-import {COUNT_RANDOM_PICTURES} from './constants.js';
+import {COUNT_RANDOM_PICTURES, RERENDER_DELAY} from './constants.js';
 
 const pictureListElement = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture')
@@ -48,12 +49,12 @@ const clearActiveFilter = () => {
 };
 
 const setFilter = (filter, cb) => {
-  filter.element.addEventListener('click', () => {
+  filter.element.addEventListener('click', _.debounce(() => {
     clearActiveFilter();
     filter.element.classList.add(FILTER_BUTTON_ACTIVE_CLASS);
     setActiveFilter(filter.type);
     cb();
-  });
+  }, RERENDER_DELAY));
 };
 
 const getFiltredPicturesRandom = (userPictures) => {

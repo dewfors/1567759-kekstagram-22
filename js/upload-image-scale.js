@@ -14,7 +14,7 @@ const clearScaleImage = () => {
   scaleControlValueElement.value = `${scaleProperty.SCALE_MAX}%`;
 };
 
-const setScaleImage = ({target}) => {
+const onSetScaleImage = ({target}) => {
   let scaleValue = parseInt(scaleControlValueElement.value);
 
   if (target === scaleControlSmallerElement) {
@@ -31,7 +31,7 @@ const setScaleImage = ({target}) => {
   imageUploadPreviewElement.style.transform = `scale(${scaleValue / 100})`;
 }
 
-scaleControlSmallerElement.addEventListener('click', setScaleImage);
-scaleControlBiggerElement.addEventListener('click', setScaleImage);
+scaleControlSmallerElement.addEventListener('click', onSetScaleImage);
+scaleControlBiggerElement.addEventListener('click', onSetScaleImage);
 
 export {clearScaleImage};

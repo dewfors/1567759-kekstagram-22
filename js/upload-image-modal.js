@@ -1,6 +1,6 @@
-import {HIDDEN_STATE, MODAL_OPEN_STATE} from './constants.js';
+import {HIDDEN_STATE, MODAL_OPEN_STATE, FILE_TYPES} from './constants.js';
 import {isEscEvent, isEnterEvent} from './util.js';
-import {FILE_TYPES} from './constants.js';
+import {clearEffect} from './upload-image-effect.js';
 
 const fileNameElement = document.querySelector('#upload-file');
 const imageOverlayElement = document.querySelector('.img-upload__overlay');
@@ -27,10 +27,10 @@ const onPopupEscKeydown = (evt) => {
   }
 
   evt.preventDefault();
-  closeUploadImageModal();
+  onCloseUploadImageModal();
 };
 
-const loadFile = () => {
+const onLoadFile = () => {
   const file = fileNameElement.files[0];
   const fileName = file.name.toLowerCase();
 
@@ -52,35 +52,36 @@ const loadFile = () => {
   }
 };
 
-const openUploadImageModal = () => {
+const onOpenUploadImageModal = () => {
+  clearEffect();
   imageOverlayElement.classList.remove(HIDDEN_STATE);
   bodyElement.classList.add(MODAL_OPEN_STATE);
 
-  fileNameElement.addEventListener('change', loadFile);
+  fileNameElement.addEventListener('change', onLoadFile);
 
   document.addEventListener('keydown', onPopupEscKeydown);
 };
 
-const closeUploadImageModal = () => {
+const onCloseUploadImageModal = () => {
   imageOverlayElement.classList.add(HIDDEN_STATE);
   bodyElement.classList.remove(MODAL_OPEN_STATE);
 
-  fileNameElement.removeEventListener('change', loadFile);
+  fileNameElement.removeEventListener('change', onLoadFile);
 
   form.reset();
 
   document.removeEventListener('keydown', onPopupEscKeydown);
 };
 
-fileNameElement.addEventListener('input', openUploadImageModal);
+fileNameElement.addEventListener('input', onOpenUploadImageModal);
 
-imageModalCloseElement.addEventListener('click', closeUploadImageModal);
+imageModalCloseElement.addEventListener('click', onCloseUploadImageModal);
 
 imageModalCloseElement.addEventListener('keydown', (evt) => {
   if (!isEnterEvent(evt)) {
     return;
   }
-  closeUploadImageModal();
+  onCloseUploadImageModal();
 });
 
-export {closeUploadImageModal};
+export {onCloseUploadImageModal};

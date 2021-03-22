@@ -27,7 +27,7 @@ const hideValidationMessage = (element) => {
   element.classList.remove(ERROR_STATE);
 };
 
-const checkValidityDescription = () => {
+const onCheckValidityDescription = () => {
   if (!checkLengthDescription(description.value, DESCRIPTION_MAX_LENGTH)) {
     showValidationMessage(description, LENGTH_ERROR_MESSAGE);
   } else {
@@ -49,7 +49,7 @@ const checkUniqueHashTag = (array) => {
   return array.length === uniqueArr.size;
 };
 
-const checkValidityHashtag = () => {
+const onCheckValidityHashtag = () => {
   const hashtagArrOrigin = hashtags.value.split(' ');
   const hashtagArray = hashtagArrOrigin.filter(elem => elem !== '');
   const hashtagErrorCount = hashtagArray.length > 5;
@@ -73,7 +73,7 @@ const checkValidityHashtag = () => {
   hashtags.reportValidity();
 };
 
-description.addEventListener('input', checkValidityDescription);
-hashtags.addEventListener('input', checkValidityHashtag);
+description.addEventListener('input', onCheckValidityDescription);
+hashtags.addEventListener('input', onCheckValidityHashtag);
 
-export {checkValidityDescription, checkValidityHashtag}
+export {onCheckValidityDescription, onCheckValidityHashtag}

@@ -47,7 +47,7 @@ const closeModal = () => {
   bodyElement.classList.remove(MODAL_OPEN_STATE);
   clearComments();
   numberOfCommentsShown = 0;
-  commentsLoaderButton.removeEventListener('click', showMoreComments);
+  commentsLoaderButton.removeEventListener('click', onShowMoreComments);
   commentsList = null;
 }
 
@@ -72,7 +72,7 @@ const clearComments = () => {
   })
 };
 
-const showMoreComments = () => {
+const onShowMoreComments = () => {
   if (numberOfCommentsShown === commentsList.length) {
     return;
   }
@@ -102,9 +102,9 @@ const showMoreComments = () => {
 const renderImageComments = () => {
   clearComments();
   showCommentsLoaderButton();
-  showMoreComments();
+  onShowMoreComments();
 
-  commentsLoaderButton.addEventListener('click', showMoreComments);
+  commentsLoaderButton.addEventListener('click', onShowMoreComments);
 }
 
 export {renderImageModal};
