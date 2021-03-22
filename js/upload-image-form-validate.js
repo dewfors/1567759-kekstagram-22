@@ -17,25 +17,29 @@ const checkLengthDescription = (value, maxLength) => {
   return value.length < maxLength;
 }
 
-//Проверка поля коментариев
+const showValidationMessage = (element, message) => {
+  element.setCustomValidity(message);
+  element.classList.add(ERROR_STATE);
+};
+
+const hideValidationMessage = (element) => {
+  element.setCustomValidity('');
+  element.classList.remove(ERROR_STATE);
+};
+
 const checkValidityDescription = () => {
   if (!checkLengthDescription(description.value, DESCRIPTION_MAX_LENGTH)) {
-    description.setCustomValidity(LENGTH_ERROR_MESSAGE);
-    description.classList.add(ERROR_STATE);
+    showValidationMessage(description, LENGTH_ERROR_MESSAGE);
   } else {
-    description.setCustomValidity('');
-    description.classList.remove(ERROR_STATE);
+    hideValidationMessage(description);
   }
   description.reportValidity();
 }
 
-// Проверка поля хештег
-// Проверка строки, с попощью регулярки
 const checkHashTag = (string) => {
   return REGEX.test(string);
 };
 
-//Проверка на уникальность с помощью new Set
 const checkUniqueHashTag = (array) => {
   const hashtagLower = array.map(letter => {
     return letter.toLowerCase();
@@ -46,31 +50,24 @@ const checkUniqueHashTag = (array) => {
 };
 
 const checkValidityHashtag = () => {
-  //Считуем введеное значение и преобразуем в массив
   const hashtagArrOrigin = hashtags.value.split(' ');
-  //Копируем введеднные данные в массив чтоб сохранять хештеги
   const hashtagArray = hashtagArrOrigin.filter(elem => elem !== '');
-  //это ниже 3 проверки, на длину, на формат и на уникальноть, если какое-то из них отдает true , то условие и срабатывает в switch case
   const hashtagErrorCount = hashtagArray.length > 5;
   const hashtagErrorFormat = !hashtagArray.every(checkHashTag);
   const hashtagErrorUniq = !checkUniqueHashTag(hashtagArray);
 
   switch (true) {
     case hashtagErrorFormat:
-      hashtags.setCustomValidity(FORMAT_ERROR_MESSAGE);
-      hashtags.classList.add(ERROR_STATE);
+      showValidationMessage(hashtags, FORMAT_ERROR_MESSAGE);
       break;
     case hashtagErrorCount:
-      hashtags.setCustomValidity(COUNT_ERROR_MESSAGE);
-      hashtags.classList.add(ERROR_STATE);
+      showValidationMessage(hashtags, COUNT_ERROR_MESSAGE);
       break;
     case hashtagErrorUniq:
-      hashtags.setCustomValidity(UNIQUE_ERROR_MESSAGE);
-      hashtags.classList.add(ERROR_STATE);
+      showValidationMessage(hashtags, UNIQUE_ERROR_MESSAGE);
       break;
     default:
-      hashtags.setCustomValidity('');
-      hashtags.classList.remove(ERROR_STATE);
+      hideValidationMessage(hashtags);
   }
 
   hashtags.reportValidity();

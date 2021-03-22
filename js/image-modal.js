@@ -1,7 +1,7 @@
 import {HIDDEN_STATE, MODAL_OPEN_STATE} from './constants.js';
 import {isEscEvent} from './util.js';
+import {COUNT_COMMENTS_TO_LOADER} from './constants.js';
 
-const COUNT_COMMENTS_TO_LOADER = 5;
 let numberOfCommentsShown = 0;
 let commentsList = null;
 

@@ -2,8 +2,7 @@ import {sendData} from './api.js';
 import {clearScaleImage} from './upload-image-scale.js';
 import {clearEffect} from './upload-image-effect.js';
 import {closeUploadImageModal} from './upload-image-modal.js';
-import {openSuccessMessage} from './message-modal-success.js';
-import {openErrorMessage} from './message-modal-error.js';
+import {openMessage} from './message-modal.js';
 
 const form = document.querySelector('.img-upload__form');
 const hashtags = form.querySelector('.text__hashtags');
@@ -17,12 +16,13 @@ const onSuccess = () => {
   clearScaleImage();
   clearEffect();
   closeUploadImageModal();
-  openSuccessMessage();
+  openMessage('success');
+
 };
 
 const onFail = () => {
   closeUploadImageModal();
-  openErrorMessage();
+  openMessage('error');
 };
 
 const formSubmit = () => {

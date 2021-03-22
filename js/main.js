@@ -9,8 +9,7 @@ import {getData} from './api.js';
 import {showAlert} from './util.js';
 import {formSubmit} from './upload-image-form.js';
 import './upload-image-form-validate.js';
-
-const RERENDER_DELAY = 500;
+import {RERENDER_DELAY} from './constants.js';
 
 getData(
   (data) => {
